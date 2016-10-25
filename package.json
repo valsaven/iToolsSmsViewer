@@ -1,0 +1,17 @@
+{
+  "name": "itools-sms-viewer",
+  "version": "0.0.1",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "dependencies": {
+    "electron": "^1.4.7"
+  },
+  "author": "Val Saven <val.saven@gmail.com>",
+  "license": "GPL-3.0",
+  "private": true,
+  "devDependencies": {
+    "electron-rebuild": "^1.4.0"
+  }
+}
