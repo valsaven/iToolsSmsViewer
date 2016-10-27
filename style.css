@@ -1,0 +1,62 @@
+html, body {
+  font-family: sans-serif;
+  margin: 0;
+}
+
+input:focus {
+  outline: none;
+}
+
+/* Search */
+.search-box {
+  background-color: #BDC8CB;
+  padding: 0 10px;
+}
+
+#search {
+  border-radius: 50px;
+  margin: 5px;
+  padding: 0 5px;
+  width: 95%;
+}
+
+/* Subscribers List */
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Subscriber */
+.subscriber {
+  border-bottom: 1px solid #888888;
+  flex-direction: column;
+  padding: 5px 20px;
+}
+.subscriber:hover {
+  background-color: #007AFF;
+  cursor: pointer;
+}
+
+.subscriber:hover * {
+  color: #ffffff;
+}
+
+.title {
+  display: flex;
+  flex-direction: row;
+  padding-bottom: 5px;
+}
+
+.number {
+  font-weight: bold;
+}
+
+.date {
+  color: #007AFF;
+  margin-left: auto;
+}
+
+.lastSms {
+  color: #858489;
+  font-size: 14px;
+}
