@@ -12,11 +12,22 @@ let win;
 
 function createWindow() {
   // Create the browser window.
+
+  // Dev
   win = new BrowserWindow({
-    width: 320,
+    width: 400,
     height: 480,
     icon: 'sms.png',
   });
+  // open DevTools
+  // win.webContents.openDevTools();
+
+  // Prod
+  // win = new BrowserWindow({
+  //   width: 320,
+  //   height: 480,
+  //   icon: 'sms.png',
+  // });
 
   // and load the index.html of the app.
   win.loadURL(url.format({

@@ -53,6 +53,7 @@ input:focus {
 
 .date {
   color: #007AFF;
+  font-size: small;
   margin-left: auto;
 }
 

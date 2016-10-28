@@ -5,17 +5,22 @@
   <title>iTools SMS viewer</title>
   <link href="style.css" rel="stylesheet">
 </head>
-<body>
+<body ng-app="smsViewer" ng-controller="mainCtrl">
   <div class="search-box">
-    <input type="text" name="search" id="search" placeholder="Search">
+    <input type="text" name="search" id="search" placeholder="Search" ng-model="search">
   </div>
+  <!-- TODO: Temp button-->
+  <button ng-click="loadMore()">Load more</button>
   <div id="subscribers" class="container">
-    <div class="subscriber">
+    <div class="subscriber" ng-repeat="s in subscribers | limitTo: totalDisplayed | filter: search">
       <div class="title">
-        <div class="number"></div>
-        <div class="date"></div>
+        <div class="number">{{s.number}}</div>
+        <div class="date">{{s.date}}</div>
       </div>
-      <div class="lastSms"></div>
+      <div class="lastSms">{{s.text}}</div>
     </div>
+  </div>
+  <script src="libs/angular.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>
