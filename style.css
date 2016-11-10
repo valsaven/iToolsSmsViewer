@@ -7,6 +7,11 @@ input:focus {
   outline: none;
 }
 
+.container {
+  display: flex;
+  flex-direction: row;
+}
+
 /* Search */
 .search-box {
   background-color: #BDC8CB;
@@ -21,8 +26,8 @@ input:focus {
 }
 
 /* Subscribers List */
-.container {
-  display: flex;
+#subscribers {
+  flex: 1;
   flex-direction: column;
 }
 
@@ -58,6 +63,27 @@ input:focus {
 }
 
 .lastSms {
+  color: #858489;
+  font-size: 14px;
+}
+
+/* Messages List */
+#messages {
+  flex: 1;
+  flex-direction: column;
+}
+
+.is-from-me {
+  font-weight: bold;
+}
+
+.date {
+  color: #007AFF;
+  font-size: small;
+  margin-left: auto;
+}
+
+.text {
   color: #858489;
   font-size: 14px;
 }

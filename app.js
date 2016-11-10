@@ -8,7 +8,37 @@ app.controller('mainCtrl', ($scope) => {
 
   // Loader
   $scope.totalDisplayed = 20;
-  $scope.loadMore = () => $scope.totalDisplayed += 20;
+  $scope.loadMore = () => {
+    $scope.totalDisplayed += 20;
+
+    const sub = [];
+    $scope.subscribers2 = $scope.subscribers.reduce((res, s) => {
+      if (sub[s.number] !== undefined) {
+        res[sub[s.number]].messages.push({
+          message_id: s.message_id,
+          date: s.date,
+          is_from_me: s.is_from_me,
+          text: s.text,
+        });
+      } else {
+        res.push({
+          number: s.number,
+          messages: [{
+            message_id: s.message_id,
+            date: s.date,
+            is_from_me: s.is_from_me,
+            text: s.text,
+          }],
+        });
+        sub[s.number] = res.length - 1;
+      }
+      return res;
+    }, []);
+  };
+
+  $scope.selectSubscriber = (subscriber) => {
+    $scope.subscriber = subscriber;
+  };
 
   function convertDate(row) {
     const date = new Date();
@@ -33,7 +63,6 @@ app.controller('mainCtrl', ($scope) => {
     'ORDER BY subscriber_id, date ASC', (err, rows) => {
     rows.forEach((row) => {
       convertDate(row);
-
       return $scope.subscribers;
     });
   });
