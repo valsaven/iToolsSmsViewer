@@ -15,7 +15,7 @@ function createWindow() {
 
   // Dev
   win = new BrowserWindow({
-    width: 400,
+    width: 800,
     height: 480,
     icon: 'sms.png',
   });

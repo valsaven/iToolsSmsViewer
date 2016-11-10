@@ -7,17 +7,29 @@
 </head>
 <body ng-app="smsViewer" ng-controller="mainCtrl">
   <div class="search-box">
-    <input type="text" name="search" id="search" placeholder="Search" ng-model="search">
+    <input type="text" name="search" id="search"
+           placeholder="Search" ng-model="search">
   </div>
   <!-- TODO: Temp button-->
   <button ng-click="loadMore()">Load more</button>
-  <div id="subscribers" class="container">
-    <div class="subscriber" ng-repeat="s in subscribers | limitTo: totalDisplayed | filter: search">
-      <div class="title">
-        <div class="number">{{s.number}}</div>
-        <div class="date">{{s.date}}</div>
+  <div class="container">
+    <div id="subscribers">
+      <div class="subscriber" ng-click="selectSubscriber(s)" ng-repeat="s in subscribers2 | limitTo: totalDisplayed | filter: search">
+        <div class="title">
+          <div class="number">{{s.number}}</div>
+          <div class="date">{{s.date}}</div>
+        </div>
+        <div class="lastSms">{{s.text}}</div>
       </div>
-      <div class="lastSms">{{s.text}}</div>
+    </div>
+    <div id="messages">
+      <div class="message" ng-repeat="m in subscriber.messages | filter: search">
+        <div class="title">
+          <div class="is-from-me">{{m.is_from_me}}</div>
+          <div class="date">{{m.date}}</div>
+        </div>
+        <div class="text">{{m.text}}</div>
+      </div>
     </div>
   </div>
   <script src="libs/angular.js"></script>
