@@ -1,0 +1,10 @@
+{
+  "linux": {
+    "title": "iTools SMS Viewer",
+    "icon": "icons/sms.icns"
+  },
+  "win": {
+    "title": "iTools SMS Viewer",
+    "icon": "icons/sms.ico"
+  }
+}
