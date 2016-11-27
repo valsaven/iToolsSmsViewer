@@ -10,11 +10,9 @@
     <input type="text" name="search" id="search"
            placeholder="Search" ng-model="search">
   </div>
-  <!-- TODO: Temp button-->
-  <button ng-click="loadMore()">Load more</button>
   <div class="container">
     <div id="subscribers">
-      <div class="subscriber" ng-click="selectSubscriber(s)" ng-repeat="s in subscribers2 | limitTo: totalDisplayed | filter: search">
+      <div class="subscriber" ng-click="selectSubscriber(s)" ng-repeat="s in subscribers | filter: search">
         <div class="title">
           <div class="number">{{s.number}}</div>
           <div class="date">{{s.date}}</div>
