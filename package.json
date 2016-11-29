@@ -19,15 +19,15 @@
     "build:win": "npm run pack:win && electron-builder \"dist/win/iTools SMS Viewer-win32-x64\" --platform=win --out=\"dist/win\" --config=builder.json"
   },
   "dependencies": {
-    "angular": "^1.5.8",
-    "electron": "^1.4.7",
+    "angular": "^1.5.9",
+    "electron": "^1.4.10",
     "sqlite3": "^3.1.8"
   },
   "author": "Val Saven <val.saven@gmail.com>",
   "license": "GPL-3.0",
   "private": true,
   "devDependencies": {
-    "electron-builder": "^8.6.0",
+    "electron-builder": "^10.5.0",
     "electron-packager": "^8.3.0",
     "electron-rebuild": "^1.4.0"
   }
