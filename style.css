@@ -69,7 +69,7 @@ input:focus {
 
 /* Messages List */
 #messages {
-  flex: 1;
+  flex: 2;
   flex-direction: column;
 }
 
@@ -86,4 +86,17 @@ input:focus {
 .text {
   color: #858489;
   font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.received {
+  color: red;
+  text-align: left;
+  width: 50%;
+}
+
+.sent {
+  color: green;
+  text-align: right;
+  padding-left: 50%;
 }

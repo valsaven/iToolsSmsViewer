@@ -77,6 +77,9 @@ app.controller('mainCtrl', ($scope) => {
     }
   }
 
+  // Message type
+  $scope.type = (m) => m ? 'sent' : 'received';
+
   const subscribers = new Subscribers($scope);
 
   /**

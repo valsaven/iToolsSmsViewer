@@ -21,11 +21,9 @@
       </div>
     </div>
     <div id="messages">
-      <div class="message" ng-repeat="m in subscriber.messages | filter: search">
-        <div class="title">
-          <div class="is-from-me">{{m.is_from_me}}</div>
-          <div class="date">{{m.date}}</div>
-        </div>
+      <div class="message" ng-repeat="m in subscriber.messages | filter: search"
+           ng-class="type(m.is_from_me)">
+        <div class="date">{{m.date}}</div>
         <div class="text">{{m.text}}</div>
       </div>
     </div>
