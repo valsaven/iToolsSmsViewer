@@ -13,22 +13,15 @@ let win;
 function createWindow() {
   // Create the browser window.
 
-  // Dev
   win = new BrowserWindow({
     width: 800,
-    height: 480,
+    height: 600,
     icon: './icons/sms.png',
   });
-  // open DevTools
-  // win.webContents.openDevTools();
 
-  // Prod
-  // win = new BrowserWindow({
-  //   width: 320,
-  //   height: 480,
-  //   icon: 'sms.png',
-  // });
-
+  // Hide menu bar
+  win.setMenu(null);
+  
   // and load the index.html of the app.
   win.loadURL(url.format({
     pathname: path.join(__dirname, 'index.html'),
