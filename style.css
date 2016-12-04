@@ -37,6 +37,7 @@ input:focus {
   flex-direction: column;
   padding: 5px 20px;
 }
+
 .subscriber:hover {
   background-color: #007AFF;
   cursor: pointer;
@@ -69,6 +70,7 @@ input:focus {
 
 /* Messages List */
 #messages {
+  background-color: #DBE1ED;
   flex: 2;
   flex-direction: column;
 }
@@ -84,19 +86,27 @@ input:focus {
 }
 
 .text {
-  color: #858489;
+  border: 1px solid black;
+  border-radius: 10px;
   font-size: 14px;
   margin-bottom: 10px;
+  padding: 10px;
 }
 
 .received {
-  color: red;
   text-align: left;
   width: 50%;
 }
 
+.received .text {
+  background-color: #D3D3D3;
+}
+
 .sent {
-  color: green;
-  text-align: right;
   padding-left: 50%;
+  text-align: right;
+}
+
+.sent .text {
+  background-color: #93D841;
 }
