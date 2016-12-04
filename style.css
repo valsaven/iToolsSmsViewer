@@ -75,6 +75,10 @@ input:focus {
   flex-direction: column;
 }
 
+.message {
+  margin: 0 10px 0 10px;
+}
+
 .is-from-me {
   font-weight: bold;
 }
