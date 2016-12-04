@@ -16,8 +16,6 @@ app.controller('mainCtrl', ($scope) => {
      * @param {object} $scope - Current controller $scope
      */
     constructor($scope) {
-      $scope.subscribers = [];
-
       /**
        * Convert a date from "354377899" to "Mon, 19 Mar 2012 18:18:19 GMT"
        * @param {string} date
@@ -31,7 +29,7 @@ app.controller('mainCtrl', ($scope) => {
         return d.toUTCString();
       }
 
-      db.all('SELECT chat.ROWID as subscriber_id,' +
+      $scope.subscribers = db.all('SELECT chat.ROWID as subscriber_id,' +
         'chat.chat_identifier AS number,' +
         'message.ROWID AS message_id,' +
         'message.date AS date,' +
@@ -80,7 +78,7 @@ app.controller('mainCtrl', ($scope) => {
   // Message type
   $scope.type = (m) => m ? 'sent' : 'received';
 
-  const subscribers = new Subscribers($scope);
+  new Subscribers($scope);
 
   /**
    * Select subscriber and show his messages
