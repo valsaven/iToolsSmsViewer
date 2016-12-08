@@ -13,6 +13,7 @@
   <div class="container">
     <div id="subscribers">
       <div class="subscriber" ng-click="selectSubscriber(s)"
+           ng-class="{active: subscriber.number == s.number}"
            ng-repeat="s in subscribers | filter: search">
         <div class="title">
           <div class="number">{{s.number}}</div>
