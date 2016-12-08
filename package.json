@@ -11,23 +11,23 @@
     "clean:win": "rm -rf ./dist/win",
 
     "pack": "npm run clean && npm run pack:linux && npm run pack:win",
-    "pack:linux": "npm run clean:linux && electron-packager . \"iTools SMS Viewer\" --out=dist/linux --platform=linux --arch=x64 --version=1.4.10 --icon=icons/sms.png --ignore=dist --ignore=icons --ignore=builder.json --ignore=README.md --ignore=.gitignore --ignore=preview.png --ignore=sms.db",
-    "pack:win": "npm run clean:win && electron-packager . \"iTools SMS Viewer\" --out=dist/win --platform=win32 --arch=x64 --version=1.4.10 --icon=icons/sms.ico --ignore=dist --ignore=icons --ignore=builder.json --ignore=README.md --ignore=.gitignore --ignore=preview.png --ignore=sms.db",
+    "pack:linux": "npm run clean:linux && electron-packager . \"iTools SMS Viewer\" --out=dist/linux --platform=linux --arch=x64 --version=1.4.11 --icon=icons/sms.png --ignore=dist --ignore=icons --ignore=builder.json --ignore=README.md --ignore=.gitignore --ignore=preview.png --ignore=sms.db",
+    "pack:win": "npm run clean:win && electron-packager . \"iTools SMS Viewer\" --out=dist/win --platform=win32 --arch=x64 --version=1.4.11 --icon=icons/sms.ico --ignore=dist --ignore=icons --ignore=builder.json --ignore=README.md --ignore=.gitignore --ignore=preview.png --ignore=sms.db",
 
     "build": "npm run build:linux && npm run build:win",
     "build:linux": "npm run pack:linux && electron-builder \"dist/linux/iTools SMS Viewer-darwin-x64/iTools SMS Viewer.app\" --platform=linux --out=\"dist/linux\" --config=builder.json",
     "build:win": "npm run pack:win && electron-builder \"dist/win/iTools SMS Viewer-win32-x64\" --platform=win --out=\"dist/win\" --config=builder.json"
   },
   "dependencies": {
-    "angular": "^1.5.9",
-    "electron": "^1.4.10",
+    "angular": "^1.6.0",
+    "electron": "^1.4.11",
     "sqlite3": "^3.1.8"
   },
   "author": "Val Saven <val.saven@gmail.com>",
   "license": "GPL-3.0",
   "private": true,
   "devDependencies": {
-    "electron-builder": "^10.5.0",
+    "electron-builder": "^10.6.1",
     "electron-packager": "^8.3.0",
     "electron-rebuild": "^1.4.0"
   }
