@@ -27,8 +27,10 @@ input:focus {
 
 /* Subscribers List */
 #subscribers {
-  flex: 1;
   flex-direction: column;
+  flex: 1;
+  height: 570px;
+  overflow: auto;
 }
 
 /* Subscriber */
@@ -71,8 +73,10 @@ input:focus {
 /* Messages List */
 #messages {
   background-color: #DBE1ED;
-  flex: 2;
   flex-direction: column;
+  flex: 2;
+  height: 570px;
+  overflow: auto;
 }
 
 .message {
