@@ -40,6 +40,11 @@ input:focus {
   padding: 5px 20px;
 }
 
+.active {
+  background-color: #007AFF;
+  color: #ffffff;
+}
+
 .subscriber:hover {
   background-color: #007AFF;
   cursor: pointer;
