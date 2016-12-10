@@ -29,7 +29,7 @@ input:focus {
 #subscribers {
   flex-direction: column;
   flex: 1;
-  height: 570px;
+  height: 530px;
   overflow: auto;
 }
 
@@ -80,7 +80,7 @@ input:focus {
   background-color: #DBE1ED;
   flex-direction: column;
   flex: 2;
-  height: 570px;
+  height: 530px;
   overflow: auto;
 }
 
