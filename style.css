@@ -20,8 +20,10 @@ input:focus {
 
 #search {
   border-radius: 50px;
+  border: solid 1px #dcdcdc;
   margin: 5px;
-  padding: 0 5px;
+  padding: 5px;
+  transition: box-shadow 0.3s, border 0.3s;
   width: 95%;
 }
 
