@@ -2,7 +2,7 @@
 SMS viewer for iTools Super Backup.
 
 ## Preview
-<img src="https://cdn.rawgit.com/valsaven/itools-sms-viewer/master/preview.png" alt="preview" width="300">
+<img src="https://rawgit.com/valsaven/itools-sms-viewer/master/preview.png" alt="preview" width="300">
 
 ## Installation Instructions
 1. Unpack the iTools-SMS-Viewer-linux-x64.tar.gz file using the following command: ```tar xfz iTools-SMS-Viewer-linux-x64.tar.gz```
