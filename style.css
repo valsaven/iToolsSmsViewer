@@ -20,8 +20,10 @@ input:focus {
 
 #search {
   border-radius: 50px;
+  border: solid 1px #dcdcdc;
   margin: 5px;
-  padding: 0 5px;
+  padding: 5px;
+  transition: box-shadow 0.3s, border 0.3s;
   width: 95%;
 }
 
@@ -37,11 +39,11 @@ input:focus {
 .subscriber {
   border-bottom: 1px solid #888888;
   flex-direction: column;
-  padding: 5px 20px;
+  padding: 8px 20px 2px 20px;
 }
 
 .active {
-  background-color: #007AFF;
+  background-color: #0060dc;
   color: #ffffff;
 }
 
@@ -85,7 +87,15 @@ input:focus {
 }
 
 .message {
-  margin: 0 10px 0 10px;
+  border-radius: 5px;
+  clear: both;
+  display: inline-block;
+  font-size: 16px;
+  margin: 8px;
+  max-width: 50%;
+  padding: 13px 14px;
+  position: relative;
+  vertical-align: top;
 }
 
 .is-from-me {
@@ -95,31 +105,18 @@ input:focus {
 .date {
   color: #007AFF;
   font-size: small;
+  margin-bottom: 4px;
   margin-left: auto;
 }
 
-.text {
-  border: 1px solid black;
-  border-radius: 10px;
-  font-size: 14px;
-  margin-bottom: 10px;
-  padding: 10px;
-}
-
 .received {
-  text-align: left;
-  width: 50%;
-}
-
-.received .text {
+  align-self: flex-start;
   background-color: #D3D3D3;
+  float: left;
 }
 
 .sent {
-  padding-left: 50%;
-  text-align: right;
-}
-
-.sent .text {
+  align-self: flex-end;
   background-color: #93D841;
+  float: right;
 }

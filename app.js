@@ -26,7 +26,7 @@ app.controller('mainCtrl', ($scope) => {
         // Date starts from 12/26/2000 04:00:00
         const sum = (977803200 + date) * 1000;
         d.setTime(sum);
-        return d.toUTCString();
+        return d.toUTCString().slice(0, -4);
       }
 
       $scope.subscribers = db.all('SELECT chat.ROWID as subscriber_id,' +
