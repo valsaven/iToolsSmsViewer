@@ -1,6 +1,8 @@
-html, body {
-  font-family: sans-serif;
+html,
+body {
   margin: 0;
+
+  font-family: sans-serif;
 }
 
 input:focus {
@@ -14,51 +16,59 @@ input:focus {
 
 /* Search */
 .search-box {
-  background-color: #BDC8CB;
   padding: 0 10px;
+
+  background-color: #bdc8cb;
 }
 
 #search {
-  border-radius: 50px;
-  border: solid 1px #dcdcdc;
+  width: 95%;
   margin: 5px;
   padding: 5px;
-  transition: box-shadow 0.3s, border 0.3s;
-  width: 95%;
+
+  transition: box-shadow .3s, border .3s;
+
+  border: solid 1px #dcdcdc;
+  border-radius: 50px;
 }
 
 /* Subscribers List */
 #subscribers {
-  flex-direction: column;
-  flex: 1;
-  height: 530px;
   overflow: auto;
+  flex: 1;
+  flex-direction: column;
+
+  height: 530px;
 }
 
 /* Subscriber */
 .subscriber {
-  border-bottom: 1px solid #888888;
   flex-direction: column;
-  padding: 8px 20px 2px 20px;
+
+  padding: 8px 20px 2px;
+
+  border-bottom: 1px solid #888;
 }
 
 .active {
+  color: #fff;
   background-color: #0060dc;
-  color: #ffffff;
 }
 
 .subscriber:hover {
-  background-color: #007AFF;
   cursor: pointer;
+
+  background-color: #007aff;
 }
 
 .subscriber:hover * {
-  color: #ffffff;
+  color: #fff;
 }
 
 .title {
   display: flex;
   flex-direction: row;
+
   padding-bottom: 5px;
 }
 
@@ -67,35 +77,45 @@ input:focus {
 }
 
 .date {
-  color: #007AFF;
-  font-size: small;
   margin-left: auto;
+
+  color: #007aff;
+
+  font-size: small;
 }
 
 .lastSms {
   color: #858489;
+
   font-size: 14px;
 }
 
 /* Messages List */
 #messages {
-  background-color: #DBE1ED;
-  flex-direction: column;
-  flex: 2;
-  height: 530px;
   overflow: auto;
+  flex: 2;
+  flex-direction: column;
+
+  height: 530px;
+
+  background-color: #dbe1ed;
 }
 
 .message {
-  border-radius: 5px;
-  clear: both;
-  display: inline-block;
-  font-size: 16px;
-  margin: 8px;
-  max-width: 50%;
-  padding: 13px 14px;
   position: relative;
+
+  display: inline-block;
+  clear: both;
+
+  max-width: 50%;
+  margin: 8px;
+  padding: 13px 14px;
+
   vertical-align: top;
+
+  border-radius: 5px;
+
+  font-size: 16px;
 }
 
 .is-from-me {
@@ -103,20 +123,24 @@ input:focus {
 }
 
 .date {
-  color: #007AFF;
-  font-size: small;
   margin-bottom: 4px;
   margin-left: auto;
+
+  color: #007aff;
+
+  font-size: small;
 }
 
 .received {
-  align-self: flex-start;
-  background-color: #D3D3D3;
   float: left;
+  align-self: flex-start;
+
+  background-color: #d3d3d3;
 }
 
 .sent {
-  align-self: flex-end;
-  background-color: #93D841;
   float: right;
+  align-self: flex-end;
+
+  background-color: #93d841;
 }
