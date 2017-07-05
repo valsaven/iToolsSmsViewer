@@ -1,5 +1,3 @@
-'use strict';
-
 var angular = require('angular');
 const sqlite3 = require('sqlite3').verbose();
 
@@ -14,9 +12,9 @@ app.controller('mainCtrl', ($scope) => {
    */
   function convertDate(date) {
     const d = new Date();
-    // Date starts from 12/26/2000 04:00:00
-    const sum = (977803200 + date) * 1000;
+    const sum = (977803200 + date) * 1000; // Date starts from 12/26/2000 04:00:00
     d.setTime(sum);
+
     return d.toUTCString().slice(0, -4);
   }
 
@@ -34,39 +32,38 @@ app.controller('mainCtrl', ($scope) => {
     'ORDER BY subscriber_id, date ASC';
 
   db.all(queryGetAll, (err, rows) => {
-      const sub = [];
+    const sub = [];
 
-      rows.map((row) => row.date = convertDate(row.date));
+    rows.map(row => row.date = convertDate(row.date));
 
-      $scope.subscribers = rows.reduce((res, s) => {
-        if (sub[s.number] !== undefined) {
-          res[sub[s.number]].messages.push({
+    $scope.subscribers = rows.reduce((res, s) => {
+      if (sub[s.number] !== undefined) {
+        res[sub[s.number]].messages.push({
+          message_id: s.message_id,
+          date: s.date,
+          is_from_me: s.is_from_me,
+          text: s.text,
+        });
+      } else {
+        res.push({
+          number: s.number,
+          messages: [{
             message_id: s.message_id,
             date: s.date,
             is_from_me: s.is_from_me,
             text: s.text,
-          });
-        } else {
-          res.push({
-            number: s.number,
-            messages: [{
-              message_id: s.message_id,
-              date: s.date,
-              is_from_me: s.is_from_me,
-              text: s.text,
-            }],
-          });
-          sub[s.number] = res.length - 1;
-        }
-        return res;
-      }, []);
-    }
-  );
+          }],
+        });
+        sub[s.number] = res.length - 1;
+      }
+      return res;
+    }, []);
+  });
 
   db.close();
 
   // Message type
-  $scope.type = (m) => m ? 'sent' : 'received';
+  $scope.type = m => m ? 'sent' : 'received';
 
   /**
    * Select subscriber and show his messages
@@ -74,6 +71,8 @@ app.controller('mainCtrl', ($scope) => {
    * @return {*}
    */
   $scope.selectSubscriber = (subscriber) => {
-    return $scope.subscriber = subscriber;
+    $scope.subscriber = subscriber;
+
+    return $scope.subscriber;
   };
 });

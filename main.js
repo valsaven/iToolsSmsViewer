@@ -1,7 +1,3 @@
-/**
- * Created by val on 10/25/16.
- */
-
 const { app, BrowserWindow } = require('electron');
 const path = require('path');
 const url = require('url');
@@ -21,7 +17,7 @@ function createWindow() {
 
   // Hide menu bar
   win.setMenu(null);
-  
+
   // and load the index.html of the app.
   win.loadURL(url.format({
     pathname: path.join(__dirname, 'index.html'),
