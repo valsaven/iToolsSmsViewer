@@ -1,10 +1,11 @@
 {
   "name": "itools-sms-viewer",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "main.js",
   "scripts": {
+    "postinstall": "electron-rebuild -w sqlite3 -p",
     "start": "electron .",
-    "rebuild": "electron-rebuild -f -w sqlite3",
+    "rebuild": "electron-rebuild -w sqlite3 -p",
     "clean": "rm -rf ./dist",
     "clean:linux": "rm -rf ./dist/linux",
     "clean:win": "rd /s /q dist\\win",
@@ -16,9 +17,9 @@
     "build:win": "npm run pack:win && electron-builder \"dist/win/iTools SMS Viewer-win32-x64\" --platform=win --out=\"dist/win\" --config=builder.json"
   },
   "dependencies": {
-    "angular": "^1.6.5",
-    "electron": "^1.6.11",
-    "sqlite3": "^3.1.8"
+    "angular": "^1.6.9",
+    "electron": "^1.8.3",
+    "sqlite3": "^3.1.13"
   },
   "author": "Val Saven <val.saven@gmail.com>",
   "license": "GPL-3.0",
