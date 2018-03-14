@@ -4,7 +4,7 @@ const sqlite3 = require('sqlite3').verbose();
 const app = angular.module('smsViewer', []);
 const db = new sqlite3.Database('sms.db');
 
-app.controller('mainCtrl', ($scope) => {
+app.controller('mainCtrl', $scope => {
   /**
    * Convert a date from "354377899" to "Mon, 19 Mar 2012 18:18:19 GMT"
    * @param {string} date
@@ -18,7 +18,8 @@ app.controller('mainCtrl', ($scope) => {
     return d.toUTCString().slice(0, -4);
   }
 
-  const queryGetAll = 'SELECT chat.ROWID as subscriber_id,' +
+  const queryGetAll =
+    'SELECT chat.ROWID as subscriber_id,' +
     'chat.chat_identifier AS number,' +
     'message.ROWID AS message_id,' +
     'message.date AS date,' +
@@ -34,7 +35,7 @@ app.controller('mainCtrl', ($scope) => {
   db.all(queryGetAll, (err, rows) => {
     const sub = [];
 
-    rows.map(row => row.date = convertDate(row.date));
+    rows.map(row => (row.date = convertDate(row.date)));
 
     $scope.subscribers = rows.reduce((res, s) => {
       if (sub[s.number] !== undefined) {
@@ -42,17 +43,19 @@ app.controller('mainCtrl', ($scope) => {
           message_id: s.message_id,
           date: s.date,
           is_from_me: s.is_from_me,
-          text: s.text,
+          text: s.text
         });
       } else {
         res.push({
           number: s.number,
-          messages: [{
-            message_id: s.message_id,
-            date: s.date,
-            is_from_me: s.is_from_me,
-            text: s.text,
-          }],
+          messages: [
+            {
+              message_id: s.message_id,
+              date: s.date,
+              is_from_me: s.is_from_me,
+              text: s.text
+            }
+          ]
         });
         sub[s.number] = res.length - 1;
       }
@@ -63,14 +66,14 @@ app.controller('mainCtrl', ($scope) => {
   db.close();
 
   // Message type
-  $scope.type = m => m ? 'sent' : 'received';
+  $scope.type = m => (m ? 'sent' : 'received');
 
   /**
    * Select subscriber and show his messages
    * @param subscriber
    * @return {*}
    */
-  $scope.selectSubscriber = (subscriber) => {
+  $scope.selectSubscriber = subscriber => {
     $scope.subscriber = subscriber;
 
     return $scope.subscriber;

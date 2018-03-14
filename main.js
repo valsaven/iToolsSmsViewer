@@ -12,18 +12,20 @@ function createWindow() {
     width: 800,
     height: 600,
     icon: './icons/sms.png',
-    resizable: false,
+    resizable: false
   });
 
   // Hide menu bar
   win.setMenu(null);
 
   // and load the index.html of the app.
-  win.loadURL(url.format({
-    pathname: path.join(__dirname, 'index.html'),
-    protocol: 'file:',
-    slashes: true,
-  }));
+  win.loadURL(
+    url.format({
+      pathname: path.join(__dirname, 'index.html'),
+      protocol: 'file:',
+      slashes: true
+    })
+  );
 
   // Emitted when the window is closed.
   win.on('closed', () => {
