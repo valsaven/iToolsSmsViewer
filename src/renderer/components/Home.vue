@@ -44,6 +44,9 @@
 </template>
 
 <script>
+const sqlite3 = require('sqlite3').verbose();
+const db = new sqlite3.Database('sms.db');
+
 export default {
   name: 'Home',
   data() {
@@ -70,6 +73,41 @@ export default {
       return this.subscribers.filter(subscriber => subscriber.number
         .includes(this.search) || subscriber.text.includes(this.search));
     },
+  },
+  created() {
+    db.all(this.queryGetAll, (err, rows) => {
+      const sub = [];
+      rows.forEach((row) => {
+        row.date = this.convertDate(row.date);
+      });
+
+      this.subscribers = rows.reduce((res, s) => {
+        if (sub[s.number] !== undefined) {
+          res[sub[s.number]].messages.push({
+            message_id: s.message_id,
+            date: s.date,
+            is_from_me: s.is_from_me,
+            text: s.text,
+          });
+        } else {
+          res.push({
+            number: s.number,
+            messages: [
+              {
+                message_id: s.message_id,
+                date: s.date,
+                is_from_me: s.is_from_me,
+                text: s.text,
+              },
+            ],
+          });
+          sub[s.number] = res.length - 1;
+        }
+        return res;
+      }, []);
+    });
+
+    db.close();
   },
   methods: {
     selectSubscriber(subscriber) {

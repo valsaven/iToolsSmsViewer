@@ -53,6 +53,7 @@
     }
   },
   "dependencies": {
+    "sqlite3": "^4.0.0",
     "vue": "^2.5.16",
     "vue-electron": "^1.0.6"
   },
@@ -77,6 +78,7 @@
     "electron-builder": "^20.15.1",
     "electron-debug": "^2.0.0",
     "electron-devtools-installer": "^2.2.4",
+    "electron-rebuild": "^1.7.3",
     "eslint": "^4.19.1",
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-friendly-formatter": "^4.0.1",

@@ -12,6 +12,10 @@
 # install dependencies
 npm i
 
+# resolve sqlite3 problems
+npm install sqlite3 --build-from-source
+./node_modules/.bin/electron-rebuild -w sqlite3 -p
+
 # serve with hot reload at localhost:9080
 npm run dev
 

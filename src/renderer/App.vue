@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <home/>
+    <!-- <landing-page/> -->
   </div>
 </template>
 
