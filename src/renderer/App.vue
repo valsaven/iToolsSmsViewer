@@ -1,18 +1,18 @@
 <template>
   <div id="app">
-    <landing-page></landing-page>
+    <landing-page/>
   </div>
 </template>
 
 <script>
-  import LandingPage from '@/components/LandingPage';
+import LandingPage from '@/components/LandingPage';
 
-  export default {
-    name: 'itools-sms-viewer',
-    components: {
-      LandingPage,
-    },
-  };
+export default {
+  name: 'ItoolsSmsViewer',
+  components: {
+    LandingPage,
+  },
+};
 </script>
 
 <style>
