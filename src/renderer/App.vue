@@ -1,16 +1,16 @@
 <template>
   <div id="app">
-    <landing-page/>
+    <home/>
   </div>
 </template>
 
 <script>
-import LandingPage from '@/components/LandingPage';
+import Home from '@/components/Home';
 
 export default {
   name: 'ItoolsSmsViewer',
   components: {
-    LandingPage,
+    Home,
   },
 };
 </script>
