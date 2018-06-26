@@ -15,7 +15,6 @@
       <!-- Subscribers -->
       <div id="subscribers">
         <div
-          v-class="{ active: subscriber.number == subscriber.number }"
           v-for="(subscriber, index) in filteredSubscribers"
           :key="index"
           class="subscriber"
@@ -29,9 +28,12 @@
         </div>
       </div>
       <!-- Messages -->
-      <div id="messages">
+      <div
+        v-if="currentSubscriber"
+        id="messages"
+      >
         <div
-          v-for="(message, index) in subscriber.messages"
+          v-for="(message, index) in currentSubscriber.messages"
           :key="index"
           class="message"
         >
@@ -51,27 +53,28 @@ export default {
   name: 'Home',
   data() {
     return {
+      currentSubscriber: null,
       queryGetAll:
-    'SELECT chat.ROWID as subscriber_id,' +
-    'chat.chat_identifier AS number,' +
-    'message.ROWID AS message_id,' +
-    'message.date AS date,' +
-    'message.text AS text,' +
-    'message.is_from_me AS is_from_me ' +
-    'FROM chat_message_join ' +
-    'INNER JOIN chat ' +
-    'ON chat_message_join.chat_id = chat.ROWID ' +
-    'INNER JOIN message ' +
-    'ON chat_message_join.message_id = message.ROWID ' +
-    'ORDER BY subscriber_id, date ASC',
+    'SELECT chat.ROWID as subscriber_id,'
+    + 'chat.chat_identifier AS number,'
+    + 'message.ROWID AS message_id,'
+    + 'message.date AS date,'
+    + 'message.text AS text,'
+    + 'message.is_from_me AS is_from_me '
+    + 'FROM chat_message_join '
+    + 'INNER JOIN chat '
+    + 'ON chat_message_join.chat_id = chat.ROWID '
+    + 'INNER JOIN message '
+    + 'ON chat_message_join.message_id = message.ROWID '
+    + 'ORDER BY subscriber_id, date ASC',
       search: '',
       subscribers: [],
     };
   },
   computed: {
     filteredSubscribers() {
-      return this.subscribers.filter(subscriber => subscriber.number
-        .includes(this.search) || subscriber.text.includes(this.search));
+      return this.subscribers.filter(subscriber => subscriber.number.includes(this.search)
+      || subscriber.text.includes(this.search));
     },
   },
   created() {
@@ -112,6 +115,7 @@ export default {
   methods: {
     selectSubscriber(subscriber) {
       console.log(subscriber);
+      this.currentSubscriber = subscriber;
     },
     /**
    * Convert a date from "354377899" to "Mon, 19 Mar 2012 18:18:19 GMT"
