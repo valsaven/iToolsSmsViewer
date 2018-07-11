@@ -18,9 +18,10 @@ function createWindow() {
    * Initial window options
    */
   mainWindow = new BrowserWindow({
-    height: 563,
-    useContentSize: true,
-    width: 1000,
+    width: 800,
+    height: 600,
+    icon: './static/icons/sms.png',
+    resizable: false,
   });
 
   mainWindow.loadURL(winURL);
