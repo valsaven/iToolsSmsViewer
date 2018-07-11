@@ -32,14 +32,11 @@
         v-if="currentSubscriber"
         id="messages"
       >
-        <div
+        <message
           v-for="(message, index) in currentSubscriber.messages"
           :key="index"
-          class="message"
-        >
-          <div class="date">{{ message.date }}</div>
-          <div class="text">{{ message.text }}</div>
-        </div>
+          :message="message"
+        />
       </div>
     </div>
   </div>
@@ -51,6 +48,9 @@ const db = new sqlite3.Database('sms.db');
 
 export default {
   name: 'Home',
+  components: {
+    message: () => import('./Message'),
+  },
   data() {
     return {
       currentSubscriber: null,
@@ -235,49 +235,5 @@ input:focus {
   height: 530px;
 
   background-color: #dbe1ed;
-}
-
-.message {
-  position: relative;
-
-  display: inline-block;
-  clear: both;
-
-  max-width: 50%;
-  margin: 8px;
-  padding: 13px 14px;
-
-  vertical-align: top;
-
-  border-radius: 5px;
-
-  font-size: 16px;
-}
-
-.is-from-me {
-  font-weight: bold;
-}
-
-.date {
-  margin-bottom: 4px;
-  margin-left: auto;
-
-  color: #007aff;
-
-  font-size: small;
-}
-
-.received {
-  float: left;
-  align-self: flex-start;
-
-  background-color: #d3d3d3;
-}
-
-.sent {
-  float: right;
-  align-self: flex-end;
-
-  background-color: #93d841;
 }
 </style>
