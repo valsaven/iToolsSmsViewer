@@ -108,13 +108,16 @@ export default {
         }
         return res;
       }, []);
+
+      this.currentSubscriber = this.filteredSubscribers.length > 0
+        ? this.filteredSubscribers[0]
+        : null;
     });
 
     db.close();
   },
   methods: {
     selectSubscriber(subscriber) {
-      console.log(subscriber);
       this.currentSubscriber = subscriber;
     },
     /**
