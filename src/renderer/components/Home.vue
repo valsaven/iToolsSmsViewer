@@ -33,7 +33,7 @@
         id="messages"
       >
         <message
-          v-for="(message, index) in currentSubscriber.messages"
+          v-for="(message, index) in filteredMessages"
           :key="index"
           :message="message"
         />
@@ -73,8 +73,15 @@ export default {
   },
   computed: {
     filteredSubscribers() {
-      return this.subscribers.filter(subscriber => subscriber.number.includes(this.search)
-      || subscriber.text.includes(this.search));
+      return this.subscribers.filter((subscriber) => {
+        const messages = subscriber.messages.filter(message => message.date.includes(this.search)
+          || message.text.includes(this.search));
+        return messages.length !== 0;
+      });
+    },
+    filteredMessages() {
+      return this.currentSubscriber.messages.filter(message => message.date.includes(this.search)
+        || message.text.includes(this.search));
     },
   },
   created() {

@@ -1,6 +1,6 @@
 {
   "name": "itools-sms-viewer",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "author": "Val Saven <val.saven@gmail.com>",
   "description": "SMS viewer for iTools Super Backup",
   "private": true,
