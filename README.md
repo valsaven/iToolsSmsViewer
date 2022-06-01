@@ -12,20 +12,11 @@
 # install dependencies
 npm i
 
-# resolve sqlite3 problems
-npm install sqlite3 --build-from-source
-./node_modules/.bin/electron-rebuild -w sqlite3 -p
-
-# serve with hot reload at localhost:9080
+# Compiles and hot-reloads for development
 npm run dev
 
-# build electron application for production
+# Build package
 npm run build
-
-
-# lint all JS/Vue component files in `src/`
-npm run lint
-
 ```
 
 ### Have tested with:
