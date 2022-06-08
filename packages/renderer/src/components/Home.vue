@@ -21,10 +21,8 @@
           @click="selectSubscriber(subscriber)"
         >
           <div class="title">
-            <div class="number">{{ subscriber.number }}</div>
-            <div class="date">{{ subscriber.date }}</div>
+            <div class="number" v-text="subscriber.number"/>
           </div>
-          <div class="lastSms">{{ subscriber.text }}</div>
         </div>
       </div>
       <!-- Messages -->
@@ -32,7 +30,7 @@
         v-if="currentSubscriber"
         id="messages"
       >
-        <message
+        <message-block
           v-for="(message, index) in filteredMessages"
           :key="index"
           :message="message"
@@ -43,21 +41,22 @@
 </template>
 
 <script lang="ts">
-import Message from './Message.vue';
+import { defineComponent } from 'vue';
+import MessageBlock from './MessageBlock.vue';
+import { dbRow, Message, Subscriber } from '../types';
 
 const sqlite3 = require('sqlite3').verbose();
 const db = new sqlite3.Database('sms.db');
 
-export default {
-  name: 'Home',
 
+export default defineComponent({
   components: {
-    Message,
+    MessageBlock,
   },
 
   data() {
     return {
-      currentSubscriber: null,
+      currentSubscriber: null as Subscriber | null,
       queryGetAll:
     'SELECT chat.ROWID as subscriber_id,'
     + 'chat.chat_identifier AS number,'
@@ -72,58 +71,79 @@ export default {
     + 'ON chat_message_join.message_id = message.ROWID '
     + 'ORDER BY subscriber_id, date ASC',
       search: '',
-      subscribers: [],
+      subscribers: [] as Subscriber[],
     };
   },
 
   computed: {
-    filteredSubscribers() {
+    filteredSubscribers(): Subscriber[] {
       return this.subscribers.filter((subscriber) => {
-        const messages = subscriber.messages.filter(message => message.date.includes(this.search)
+        const messages = subscriber.messages.filter((message: Message) => message.date.includes(this.search)
           || message.text.includes(this.search));
         return messages.length !== 0;
       });
     },
 
-    filteredMessages() {
-      return this.currentSubscriber.messages.filter(message => message.date.includes(this.search)
-        || message.text.includes(this.search));
+    filteredMessages(): Message[] {
+      if (!this.currentSubscriber) {
+        return [];
+      }
+
+      return this.currentSubscriber.messages.filter(message => {
+        return message.date.includes(this.search) || message.text.includes(this.search)
+      });
+    },
+  },
+
+  methods: {
+    /**
+     * Convert a date from "354377899" to "Mon, 19 Mar 2012 18:18:19 GMT"
+     * @param {string} date
+     * @return {string}
+     */
+    convertDate(date: string) {
+      const d = new Date();
+      const sum = (977803200 + Number(date)) * 1000; // Date starts from 12/26/2000 04:00:00
+      d.setTime(sum);
+
+      return d.toUTCString().slice(0, -4);
+    },
+
+    selectSubscriber(subscriber: Subscriber) {
+      this.currentSubscriber = subscriber;
     },
   },
 
   created() {
-    console.log(this.queryGetAll);
-    db.all(this.queryGetAll, (err, rows) => {
-      const sub = [];
-
-      console.log(err);
-      console.log(rows);
-
+    db.all(this.queryGetAll, (err: any, rows: dbRow[]) => {
       rows.forEach((row) => {
         row.date = this.convertDate(row.date);
       });
 
-      this.subscribers = rows.reduce((res, s) => {
-        if (sub[s.number] !== undefined) {
-          res[sub[s.number]].messages.push({
-            message_id: s.message_id,
-            date: s.date,
-            is_from_me: s.is_from_me,
-            text: s.text,
+      // @ts-ignore
+      const sub: { [key: string]: number } = [];
+
+      this.subscribers = rows.reduce((res: Subscriber[], row: dbRow) => {
+        if (sub[row.number] != undefined) {
+          res[sub[row.number]].messages.push({
+            message_id: row.message_id,
+            date: row.date,
+            is_from_me: row.is_from_me,
+            text: row.text,
           });
         } else {
           res.push({
-            number: s.number,
+            number: row.number,
             messages: [
               {
-                message_id: s.message_id,
-                date: s.date,
-                is_from_me: s.is_from_me,
-                text: s.text,
+                message_id: row.message_id,
+                date: row.date,
+                is_from_me: row.is_from_me,
+                text: row.text,
               },
             ],
           });
-          sub[s.number] = res.length - 1;
+          sub[row.number] = res.length - 1;
         }
         return res;
       }, []);
@@ -135,26 +155,7 @@ export default {
 
     db.close();
   },
-
-  methods: {
-    selectSubscriber(subscriber) {
-      this.currentSubscriber = subscriber;
-    },
-
-    /**
-   * Convert a date from "354377899" to "Mon, 19 Mar 2012 18:18:19 GMT"
-   * @param {string} date
-   * @return {string}
-   */
-    convertDate(date: string) {
-      const d = new Date();
-      const sum = (977803200 + Number(date)) * 1000; // Date starts from 12/26/2000 04:00:00
-      d.setTime(sum);
-
-      return d.toUTCString().slice(0, -4);
-    },
-  },
-};
+});
 </script>
 
 <style>

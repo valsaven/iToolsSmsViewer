@@ -1,16 +1,11 @@
 <script setup lang="ts">
-interface Message {
-  ROWID: string;
-  date: string;
-  text: string;
-  is_from_me: boolean;
-}
+import { Message } from '../types';
 
 interface Props {
   message: Message;
 }
 
-const props = defineProps<Props>()
+defineProps<Props>()
 </script>
 
 <template>
