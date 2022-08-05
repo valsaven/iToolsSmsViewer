@@ -17,15 +17,15 @@
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^3.0.1",
-    "electron": "19.0.10",
-    "electron-builder": "^23.1.0",
+    "electron": "20.0.1",
+    "electron-builder": "^23.3.3",
     "typescript": "^4.7.4",
-    "vite": "^3.0.3",
-    "vite-plugin-electron": "^0.8.3",
+    "vite": "^3.0.4",
+    "vite-plugin-electron": "^0.8.4",
     "vite-plugin-electron-renderer": "^0.8.1",
     "vite-plugin-resolve": "^2.1.2",
     "vue": "^3.2.37",
-    "vue-tsc": "^0.39.2"
+    "vue-tsc": "^0.39.4"
   },
   "env": {
     "VITE_DEV_SERVER_HOST": "127.0.0.1",
@@ -44,6 +44,6 @@
     "vue3"
   ],
   "dependencies": {
-    "sqlite3": "^5.0.10"
+    "sqlite3": "^5.0.11"
   }
 }
