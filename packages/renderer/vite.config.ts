@@ -1,8 +1,9 @@
-import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
-import resolve, { lib2esm } from 'vite-plugin-resolve'
-import electron from 'vite-plugin-electron-renderer'
-import pkg from '../../package.json'
+import { defineConfig } from 'vite';
+import vue from '@vitejs/plugin-vue';
+import resolve from 'vite-plugin-resolve';
+import libEsm from 'lib-esm';
+import electron from 'vite-plugin-electron-renderer';
+import pkg from '../../package.json';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -23,26 +24,23 @@ export default defineConfig({
 
         // ESM format string
         'electron-store': 'export default require("electron-store");',
-        // Use lib2esm() to easy to convert ESM
-        // Equivalent to
-        /**
-         * sqlite3: () => `
-         * const _M_ = require('sqlite3');
-         * const _D_ = _M_.default || _M_;
-         * export { _D_ as default }
-         * `
-         */
-        sqlite3: lib2esm('sqlite3', { format: 'cjs' }),
-        serialport: lib2esm(
-          // CJS lib name
-          'serialport',
-          // export memebers
-          [
-            'SerialPort',
-            'SerialPortMock',
-          ],
-          { format: 'cjs' },
-        ),
+
+        sqlite3: () => {
+          const result = libEsm({
+            window: 'sqlite3',
+          })
+          return `${result.window}\n${result.exports}`
+        },
+        serialport: () => {
+          const result = libEsm({
+            window: 'serialport',
+            exports: [
+              'SerialPort',
+              'SerialPortMock',
+            ],
+          })
+          return `${result.window}\n${result.exports}`
+        },
       }
     ),
   ],
