@@ -1,11 +1,33 @@
-node_modules
-.DS_Store
-dist
-dist-ssr
-*.local
-.debug.env
+*.log
+*.bin
+*.dat
+*.lock
+*.lck
+*.bak
+*.old
+*.bak
+*.swp
+*.swo
 
-tmp
-**/.tmp
-release
-.idea
+# Байт-код Java
+*.class
+
+# Байт-код Scala
+*.sjsir
+
+# Файлы и папки, созданные sbt
+.bsp/
+target/
+dist/
+lib_managed/
+src_managed/
+project/boot/
+project/plugins/project/
+
+# Файлы, созданные IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+
+# Файлы Mac OS X
+.DS_Store
