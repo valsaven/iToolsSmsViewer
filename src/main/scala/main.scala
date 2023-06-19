@@ -1,32 +1,49 @@
 package i_tools_sms_viewer
 
 import java.sql.{Connection, DriverManager, ResultSet}
-
 import java.time._
 import java.time.format.DateTimeFormatter
+import javafx.util.Callback
 
 import scalafx.application.JFXApp3
 import scalafx.scene.Scene
 import scalafx.scene.control._
-
+import scalafx.scene.layout.{HBox, VBox, Priority}
+import scalafx.collections.ObservableBuffer
+import scalafx.Includes._
 import scalafx.scene.control.cell.TextFieldListCell
 import scalafx.util.StringConverter
-import scalafx.Includes._
-import scalafx.collections.ObservableBuffer
 
 case class Message(message_id: String, date: String, is_from_me: Boolean, text: String)
 case class Subscriber(number: String, messages: List[Message])
-
 
 object main extends JFXApp3 {
   override def start(): Unit = {
     stage = new JFXApp3.PrimaryStage {
       title = "iToolsSmsViewer"
+      resizable = false
 
-      scene = new Scene(800, 570) {
+      scene = new Scene {
+        val allSubscribers: List[Subscriber] = fetchSubscribersFromDatabase()
         var currentContact: Option[Subscriber] = None
 
-        val contacts: ListView[Subscriber] = new ListView(fetchSubscribersFromDatabase()) {
+        val searchField: TextField = new TextField {
+          layoutY = 10
+          layoutX = 10
+          text.onChange { (_, _, newSearch) =>
+            val filtered = filterSubscribers(allSubscribers, newSearch)
+            contacts.items = ObservableBuffer(filtered: _*)
+            currentContact match {
+              case Some(subscriber) if !filtered.contains(subscriber) =>
+                currentContact = None
+                messages.items = ObservableBuffer()
+              case _ =>
+            }
+          }
+        }
+
+        val contacts: ListView[Subscriber] = new ListView[Subscriber] {
+          items = ObservableBuffer(allSubscribers: _*)
           cellFactory = TextFieldListCell.forListView(
             new StringConverter[Subscriber] {
               def toString(subscriber: Subscriber): String = subscriber.number
@@ -37,13 +54,40 @@ object main extends JFXApp3 {
         }
 
         val messages: ListView[Message] = new ListView[Message]() {
-          cellFactory = TextFieldListCell.forListView(
-            new StringConverter[Message] {
-              def toString(message: Message): String = s"${message.date}: ${message.text}"
-
-              def fromString(string: String): Message = ???
+          cellFactory = { (_: ListView[Message]) =>
+            new ListCell[Message] {
+              item.onChange { (_, _, message) =>
+                graphic = message match {
+                  case null => null
+                  case msg =>
+                    val dateLabel = new Label {
+                      text <== createStringBinding(() => Option(item()).flatMap(m => Option(m.date)).getOrElse(""), item)
+                      style = "-fx-font-size: small; -fx-text-fill: #007aff; -fx-font-weight: bold"
+                    }
+                    val textLabel = new Label {
+                      text <== createStringBinding(() => Option(item()).flatMap(m => Option(m.text)).getOrElse(""), item)
+                      style = "-fx-font-size: 16px"
+                    }
+                    val vbox = new VBox {
+                      children = List(dateLabel, textLabel)
+                      style =
+                        s"""
+                           | -fx-border-radius: 5px;
+                           | -fx-font-size: 16px;
+                           | -fx-margin: 8px;
+                           | -fx-padding: 13px 14px;
+                           | -fx-background-color: ${if (msg.is_from_me) "#93d841" else "#d3d3d3"};
+                        """.stripMargin
+                    }
+                    val hbox = new HBox {
+                      children = List(vbox)
+                      alignment = if (msg.is_from_me) scalafx.geometry.Pos.CenterRight else scalafx.geometry.Pos.CenterLeft
+                    }
+                    hbox
+                }
+              }
             }
-          )
+          }
         }
 
         contacts.selectionModel().selectedItemProperty.onChange { (_, _, newSubscriber) =>
@@ -55,14 +99,22 @@ object main extends JFXApp3 {
         }
 
         // Display settings
-        messages.layoutX = 200
+        val mainPane: HBox = new HBox {
+          children = Seq(contacts, messages)
+          HBox.setHgrow(messages, Priority.Always)
+        }
 
-        content = List(contacts, messages)
+        val rootPane: VBox = new VBox {
+          children = Seq(searchField, mainPane)
+          VBox.setVgrow(mainPane, Priority.Always)
+        }
+
+        content = rootPane
       }
     }
   }
 
-  def fetchSubscribersFromDatabase(): List[Subscriber] = {
+  private def fetchSubscribersFromDatabase(): List[Subscriber] = {
     Class.forName("org.sqlite.JDBC")
     val connectionUrl = "jdbc:sqlite:./sms.db"
     val connection: Connection = DriverManager.getConnection(connectionUrl)
@@ -115,10 +167,11 @@ object main extends JFXApp3 {
     subscribers.values.toList
   }
 
-  def filterSubscribers(subscribers: List[Subscriber], search: String): List[Subscriber] = {
+  private def filterSubscribers(subscribers: List[Subscriber], search: String): List[Subscriber] = {
+    val lowerSearch = search.toLowerCase
     subscribers.filter { subscriber =>
       subscriber.messages.exists { message =>
-        message.date.contains(search) || message.text.contains(search)
+        message.date.toLowerCase.contains(lowerSearch) || message.text.toLowerCase.contains(lowerSearch)
       }
     }
   }
