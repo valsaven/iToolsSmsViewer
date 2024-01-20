@@ -24,7 +24,7 @@
     "electron-builder": "24.6.4",
     "lib-esm": "0.4.1",
     "typescript": "5.2.2",
-    "vite": "4.5.0",
+    "vite": "4.5.2",
     "vite-plugin-electron": "0.11.2",
     "vite-plugin-electron-renderer": "0.14.2",
     "vite-plugin-resolve": "2.5.1",
