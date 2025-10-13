@@ -1,11 +1,10 @@
-node_modules
-.DS_Store
-dist
-dist-ssr
-*.local
-.debug.env
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
 
-tmp
-**/.tmp
-release
-.idea
+# Virtual environments
+.venv

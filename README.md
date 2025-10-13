@@ -1,24 +1,68 @@
 # iTools SMS Viewer
 
-> SMS viewer for iTools Super Backup
+SMS viewer for backups from iTools Super Backup. Allows loading data from sms.db, viewing chats by numbers, filtering by search (by date or message text).
 
-### Preview
+Simple GUI on Python with Tkinter.
 
-<img src="https://rawgit.com/valsaven/itools-sms-viewer/master/preview.png" alt="preview" width="300">
+## Preview
 
-### Build Setup
+<img src="https://rawgit.com/valsaven/itools-sms-viewer/master/preview.avif" alt="preview" width="300">
 
-``` bash
-# install dependencies
-npm i
+## Requirements
 
-# Compiles and hot-reloads for development
-npm run dev
+- Python 3.14+ (Tkinter and sqlite3 are built-in, no need to install anything).
+- `sms.db` file from iTools backup (usually in the iPhone backup folder).
+- uv (optional, for faster dependency management and running; install via `pip install uv` or from <https://docs.astral.sh/uv/>).
 
-# Build package
-npm run build
+## Installation
+
+Clone the repository:
+
+```sh
+git clone https://github.com/valsaven/itools-sms-viewer.git
+cd itools-sms-viewer
 ```
 
-### Have tested with:
+## Launch
 
-Apple iPhone 4 A1332 32 GB (GSM)
+Place `sms.db` in the folder with `app.py` and run:
+
+```sh
+python app.py
+```
+
+Alternatively, if you have `uv` installed (recommended for better performance):
+
+```sh
+uv run app.py
+```
+
+## Build to EXE (for Windows)
+
+Install PyInstaller if not already:
+
+```sh
+pip install pyinstaller
+```
+
+Or with uv:
+
+```sh
+uv pip install pyinstaller
+```
+
+Build:
+
+```sh
+pyinstaller --onefile app.py
+```
+
+The EXE will be in the dist folder. Copy `sms.db` there for it to work.
+
+## Tested on
+
+- Apple iPhone 4 A1332 32 GB (GSM)
+
+## License
+
+This project is licensed under the GNU General Public License v3.0. See the [LICENSE](LICENSE) file for details.

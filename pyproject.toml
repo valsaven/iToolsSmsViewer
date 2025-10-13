@@ -1,0 +1,7 @@
+[project]
+name = "itools-sms-viewer"
+version = "4.0.0"
+description = "SMS viewer for iTools Super Backup"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = []
